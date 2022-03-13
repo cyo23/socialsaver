@@ -1,0 +1,10 @@
+deb http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic main restricted universe multiverse
+deb http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-security main restricted universe multiverse
+deb http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-updates main restricted universe multiverse
+deb http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-proposed main restricted universe multiverse
+deb http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-backports main restricted universe multiverse
+deb-src http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic main restricted universe multiverse
+deb-src http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-security main restricted universe multiverse
+deb-src http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-updates main restricted universe multiverse
+deb-src http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-proposed main restricted universe multiverse
+deb-src http://mirror.aarnet.edu.au/pub/ubuntu/archive/ bionic-backports main restricted universe multiverse

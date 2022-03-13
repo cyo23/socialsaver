@@ -1,0 +1,53 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.5
+    container_name: socialsaver-mysql
+    networks:
+      - socialsaver-net
+    volumes:
+      - mysqldata:/var/lib/mysql/
+    environment:
+      MYSQL_DATABASE: socialsaver
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATA: /var/lib/mysql/
+    ports:
+      - "3366:3306"
+    restart: always
+    command: sh -c 'if [ ! -f /ready ]; then printf "lower_case_table_names = 1\n" >> /etc/mysql/my.cnf && touch /ready; else echo "Already configured!"; fi && /entrypoint.sh mysqld'
+  php-fpm:
+    image: cyo23/socialsaver-fpm
+    container_name: socialsaver-fpm
+    networks:
+      - socialsaver-net
+    build:
+      context: .
+    volumes:
+      - ./src:/var/www/default/htdocs
+      - ./docker/conf/www.conf:/usr/local/php/etc/php-fpm.d/www.conf
+      - ./docker/conf/xdebug.ini:/usr/local/php/etc/conf.d/xdebug.ini
+    restart: always
+    links:
+      - db
+
+  nginx:
+    image: nginx:latest
+    container_name: socialsaver-nginx
+    networks:
+      - socialsaver-net
+    volumes:
+      - ./src:/var/www/default/htdocs/
+      - ./docker/conf/site.conf:/etc/nginx/conf.d/site.conf
+    ports:
+      - 8084:80
+    restart: always
+    links:
+      - php-fpm
+
+networks:
+  socialsaver-net:
+    name: socialsaver-net
+
+volumes:
+  mysqldata:
