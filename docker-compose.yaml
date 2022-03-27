@@ -40,7 +40,7 @@ services:
       - ./src:/var/www/default/htdocs/
       - ./docker/conf/site.conf:/etc/nginx/conf.d/site.conf
     ports:
-      - 8084:80
+      - 8080:80
     restart: always
     links:
       - php-fpm
