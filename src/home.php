@@ -13,20 +13,47 @@
             Please select the tags you are interested in
         </label>
         <input type="text" id="input-tags"/>
+        <!-- add submit button -->
+        <button id="btnSubmit" type="button" class="btn btn-outline-success">Submit</button>
     </div>
 
 
 </div>
 
 <script>
-    $("#input-tags").selectize({
-        delimiter: ",",
-        persist: false,
-        create: function (input) {
-            return {
-                value: input,
-                text: input,
-            };
-        },
+
+
+    /* Event handler to handle a button click on btnSubmit */
+    $('#btnSubmit').on('click', function() {
+
+        // 1. get all the tags entered
+        var tags = $('#input-tags').val();
+        if (tags === '') {
+            alert("Please enter at least 1 tag");
+            return;
+        }
+        // 2. save the tags to local storage under the name 'tags'
+        localStorage.setItem("tags", tags);
+
+        // send user to posts pag
+        window.location = '/index.php?page=posts';
+    });
+
+    // I want you to do the following when all data is loaded into the browser
+    $(document).ready(function() {
+        var tags = localStorage.getItem("tags");
+        if (tags) {
+            $('#input-tags').val(tags);
+        }
+        $("#input-tags").selectize({
+            delimiter: ",",
+            persist: false,
+            create: function (input) {
+                return {
+                    value: input,
+                    text: input,
+                };
+            },
+        });
     });
 </script>

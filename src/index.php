@@ -14,6 +14,9 @@ switch ($_GET['page']) {
     case 'home':
         $tabPageTitle = "Home";
     break;
+    case 'posts':
+        $tabPageTitle = 'Posts';
+        break;
     default: $tabPageTitle = '-';
 }
 ?>
@@ -70,6 +73,10 @@ switch ($_GET['page']) {
     <?php if(isset($_GET['page']) && $_GET['page'] == 'home'): ?>
         <?php $pageTitle = "Home" ?>
        <?php include("home.php") ?>
+    <?php endif; ?>
+    <?php if(isset($_GET['page']) && $_GET['page'] == 'posts'): ?>
+        <?php $pageTitle = "Posts" ?>
+        <?php include("posts.php") ?>
     <?php endif; ?>
     </div>
 </main>
